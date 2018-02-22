@@ -3,7 +3,7 @@
 require_once 'config.php';
  
 // Define variables and initialize with empty values
-$name = $address = $salary = $email = "";
+$name = $address = $salary = $email = "";  //note $email is also declared, this is the email that will be provided by user
 $name_err = $address_err = $salary_err = $name_err = "";
  
 // Processing form data when form is submitted
@@ -40,9 +40,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
   // Validate email
     $input_email = ($_POST["email"]);
-    if(empty($input_email)){
+    if(empty($input_email)){ //ensure email is not empty
         $email_err = "Please enter your email.";     
-    } elseif(!filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
+    } elseif(!filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){ //validate email
         $email_err = 'Please enter a correct email details.';
     } else{
         $email = $input_email;

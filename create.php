@@ -49,14 +49,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err) && empty($email_err)){
               //send email
       ini_set( 'display_errors', 1 );
-      error_reporting( E_ALL );
+      error_reporting( E_ALL ); //speciies which errors have been reported
       $admin_email = 'rourkecolm@gmail.com';
       $subject = 'CodeAnwhere: New employee added';
       $comment = 'New employee added: ' . $name;
       $Headers = "From: rourkecolm@gmail.com \r\n" . 
       "Reply-To: rourkecolm@gmail.com \r\n" . 
       "Content-type: text/html; charset=UTF-8 \r\n"; 
-      mail($admin_email, $subject, $comment, $Headers);
+      mail($admin_email, $subject, $comment, $Headers); //php function that sends an email notification
         // Prepare an insert statement
         $sql = "INSERT INTO employees (name, address, salary, email) VALUES (:name, :address, :salary, :email)";
  
