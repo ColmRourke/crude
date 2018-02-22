@@ -25,6 +25,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $name = $row["name"];
                 $address = $row["address"];
                 $salary = $row["salary"];
+                $email = $row["email"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -79,6 +80,10 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                     <div class="form-group">
                         <label>Salary</label>
                         <p class="form-control-static"><?php echo $row["salary"]; ?></p>
+                    </div>
+                  <div class="form-group">
+                        <label>Email</label>
+                        <p class="form-control-static"><?php echo $row["email"]; ?></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>

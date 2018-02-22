@@ -3,8 +3,8 @@
 require_once 'config.php';
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$name = $address = $salary = $email = "";
+$name_err = $address_err = $salary_err = $name_err = "";
  
 // Processing form data when form is submitted
 if(isset($_POST["id"]) && !empty($_POST["id"])){
@@ -38,23 +38,35 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     } else{
         $salary = $input_salary;
     }
+  // Validate email
+    $input_email = ($_POST["email"]);
+    if(empty($input_email)){
+        $email_err = "Please enter your email.";     
+    } elseif(!filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
+        $email_err = 'Please enter a correct email details.';
+    } else{
+        $email = $input_email;
+    }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($name_err) && empty($address_err) && empty($salary_err) && empty($email_err)){
         // Prepare an insert statement
-        $sql = "UPDATE employees SET name=:name, address=:address, salary=:salary WHERE id=:id";
+        $sql = "UPDATE employees SET name=:name, address=:address, salary=:salary, email=:email WHERE id=:id";
  
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(':name', $param_name);
             $stmt->bindParam(':address', $param_address);
             $stmt->bindParam(':salary', $param_salary);
+            $stmt->bindParam(':email', $param_email);
             $stmt->bindParam(':id', $param_id);
-            
+           
+          
             // Set parameters
             $param_name = $name;
             $param_address = $address;
             $param_salary = $salary;
+            $param_email = $email;
             $param_id = $id;
             
             // Attempt to execute the prepared statement
@@ -99,6 +111,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $name = $row["name"];
                     $address = $row["address"];
                     $salary = $row["salary"];
+                    $email = $row["email"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: error.php");
@@ -161,6 +174,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <input type="text" name="salary" class="form-control" value="<?php echo $salary; ?>">
                             <span class="help-block"><?php echo $salary_err;?></span>
                         </div>
+                       <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                            <span class="help-block"><?php echo $email_err;?></span>
+                        </div> 
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-default">Cancel</a>
