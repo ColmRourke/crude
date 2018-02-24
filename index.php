@@ -37,7 +37,7 @@
                     <?php
                     // Include config file
                     require_once 'config.php';
-                    
+                    include('session.php');
                     // Attempt select query execution
                     $sql = "SELECT * FROM employees";
                     if($result = $pdo->query($sql)){
@@ -54,12 +54,16 @@
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
+                                $average; //new variable to calculate average
+                                $rowCount = 0; //counts iteration of while loop 
                                 while($row = $result->fetch()){
-                                    echo "<tr>";
+                                  $rowCount=$rowCount+1;  
+                                  echo "<tr>";
                                         echo "<td>" . $row['id'] . "</td>";
                                         echo "<td>" . $row['name'] . "</td>";
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['salary'] . "</td>";
+                                        $average += $row['salary']; // adds up all salaries 
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='read.php?id=". $row['id'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
@@ -68,6 +72,14 @@
                                         echo "</td>";
                                     echo "</tr>";
                                 }
+                               //new code//
+                              $average = $average/$rowCount; //divides number of rows to get average
+                                echo "<tr>";
+                                echo "Average Salary: $average <br/>";
+                                echo "Number of current staff: $rowCount <br/>";
+                                echo 'Welcome ' . $_SESSION['login_user']; //output the name of the admin user
+                                echo "</tr>";
+                          //end of new code//
                                 echo "</tbody>";                            
                             echo "</table>";
                             // Free result set
