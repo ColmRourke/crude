@@ -85,8 +85,16 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <label>Email</label>
                         <p class="form-control-static"><?php echo $row["email"]; ?></p>
                     </div>
-                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
-                </div>
+                  <?php
+                  session_start();
+                  if(!isset($_SESSION["login_user"])){
+                   echo "<p><a href='indexWithoutlogin.php' class='btn btn-primary'>Back</a></p>";
+                  }
+                  else{
+                    echo "<p><a href='index.php' class='btn btn-primary'>Back</a></p>";
+                  }
+                ?>
+              </div>
             </div>        
         </div>
     </div>

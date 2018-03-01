@@ -1,6 +1,7 @@
 <?php
 // Include config file
 require_once 'config.php';
+ session_start(); // commence session
 // Define variables and initialize with empty values
 $username = $password  = "";
 $username_err = $password_err = "";
@@ -45,7 +46,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records created successfully. Redirect to login page
-                header("location: indexWithoutlogin.php");
+                $_SESSION['login_user'] = $username;
+                header("location: index.php");
                 exit();
             } else{
                 echo "Something went wrong. Please try again later.";
@@ -92,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                             <label>Password</label>
-                            <input type="text" name="password" class="form-control" value="<?php echo $password; ?>">
+                            <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
                             <span class="help-block"><?php echo $password_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">

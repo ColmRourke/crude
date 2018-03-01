@@ -43,14 +43,15 @@
 		 <div class="container-fluid">
    <body>
   	<div class="page-header">
-                        <h2>Add Admin</h2>
+                        <h2>Login</h2>
                     </div>
                
                <form action = "" method = "post">
                   <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
                   <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                  <input type="submit" class="btn btn-primary" value="Submit" />
-								  <a href="index.php" class="btn btn-default">Cancel</a>
+                  <input type="submit" class="btn btn-primary" value="Login" />
+								  <a href="indexWithoutlogin.php" class="btn btn-default">Cancel</a>
+								  <a href="addAdmin.php" class="btn btn-default">Add administrator</a>
                </form>
                
                <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>

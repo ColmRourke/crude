@@ -50,11 +50,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               //send email
       ini_set( 'display_errors', 1 );
       error_reporting( E_ALL ); //speciies which errors have been reported
-      $admin_email = 'rourkecolm@gmail.com';
+      $admin_email = $email; //sends to the employees address
       $subject = 'CodeAnwhere: New employee added';
-      $comment = 'New employee added: ' . $name;
+      $comment = 'New employee added: ' . $name;  //message sent to new empoloyee
       $Headers = "From: rourkecolm@gmail.com \r\n" . 
-      "Reply-To: rourkecolm@gmail.com \r\n" . 
       "Content-type: text/html; charset=UTF-8 \r\n"; 
       mail($admin_email, $subject, $comment, $Headers); //php function that sends an email notification
         // Prepare an insert statement
