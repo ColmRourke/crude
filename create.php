@@ -3,22 +3,31 @@
 require_once 'config.php';
 // Define variables and initialize with empty values
 $name = $address = $salary = $email = "";
-$name_err = $address_err = $salary_err = $email_err = "";
+//$name_err = $address_err = $salary_err = $email_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate name
-    $input_name = trim($_POST["name"]); //form input "name" stored as input_name
+    // Validate names
+
+   //declare array variables to store the inputs
+   $array_name = ($_POST["name"]);
+   $array_address = ($_POST["address"]);
+   $array_salary= ($_POST["salary"]);
+   $array_email = ($_POST["email"]);
+  
+  //for each variable in each array, check validitiy and submit them to database
+  for($i = 0; $i < count($array_name); $i++){
+    $input_name = trim($array_name[$i]); //store the name and trim at index i
     if(empty($input_name)){
         $name_err = "Please enter a name.";
-    } elseif(!filter_var(trim($_POST["name"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z'-.\s ]+$/")))){
+    } elseif(!filter_var(trim($input_name), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z'-.\s ]+$/")))){
         $name_err = 'Please enter a valid name.';
     } else{
         $name = $input_name; // if validated it is stored as name
     }
     
     // Validate address
-    $input_address = trim($_POST["address"]);
+    $input_address = trim($array_address[$i]); //store variable at i position
     if(empty($input_address)){
         $address_err = 'Please enter an address.';     
     } else{
@@ -26,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate salary
-    $input_salary = trim($_POST["salary"]);
+    $input_salary = trim($array_salary[$i]);
     if(empty($input_salary)){
         $salary_err = "Please enter the salary amount.";     
     } elseif(!ctype_digit($input_salary)){
@@ -36,10 +45,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
   
   // Validate email
-    $input_email = ($_POST["email"]);
+    $input_email = ($array_email[$i]);
     if(empty($input_email)){
         $email_err = "Please enter your email.";     
-    } elseif(!filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
+    } elseif(!filter_var($input_email,FILTER_VALIDATE_EMAIL)){
         $email_err = 'Please enter a correct email details.';
     } else{
         $email = $input_email;
@@ -71,21 +80,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_address = $address;
             $param_salary = $salary;
             $param_email = $email;
-            
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records created successfully. Redirect to landing page
-                header("location: index.php");
-                exit();
             } else{
                 echo "Something went wrong. Please try again later.";
             }
-        }
-         
+        }      
         // Close statement
         unset($stmt);
     }
-    
+  }
+    header("location: index.php"); //direct user to index.php (dashboard)
+    exit();
     // Close connection
     unset($pdo);
 
@@ -114,33 +121,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <h2>Create Record</h2>
                     </div>
                     <p>Please fill this form and submit to add employee record to the database.</p>
+                 
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="on">
+                       <div id="Questions">
                         <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                             <label>Name</label>
-                            <input type="text" name="name"  class="form-control" value="<?php echo $name; ?>">
+                            <input type="text" name="name[]"  class="form-control" value="<?php echo $name; ?>">
                             <span class="help-block"><?php echo $name_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($address_err)) ? 'has-error' : ''; ?>">
                             <label>Address</label>
-                            <textarea name="address" class="form-control"><?php echo $address; ?></textarea>
+                            <textarea name="address[]" class="form-control"><?php echo $address; ?></textarea>
                             <span class="help-block"><?php echo $address_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($salary_err)) ? 'has-error' : ''; ?>">
                             <label>Salary</label>
-                            <input type="text" name="salary" class="form-control" value="<?php echo $salary; ?>">
+                            <input type="text" name="salary[]" class="form-control" value="<?php echo $salary; ?>">
                             <span class="help-block"><?php echo $salary_err;?></span>
                         </div>
                       <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                            <input type="text" name="email[]" class="form-control" value="<?php echo $email; ?>"> <!--note changes here of the name, it is now an array -->
                             <span class="help-block"><?php echo $email_err;?></span>
                         </div>
+                      </div>
+                     </div>                
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-default">Cancel</a>
                     </form>
+                     
+              <button id="button" class="btn btn-default" onclick="duplicate()">Add another employee</button> <!--User can add multiple employees -->
                 </div>
             </div>        
         </div>
-    </div>
+  </div>
+  <script>   //clones the questions in the form so another employee can be added. 
+    var i = 0;
+    var original = document.getElementById("Questions"); // original is now the div with id "Questions"
+
+function duplicate() {  
+    var clone = original.cloneNode(true); // "deep" clone
+    clone.id = "Questions" + ++i;
+    original.parentNode.appendChild(clone);  //append the clone to original
+}
+  </script>
 </body>
 </html>
