@@ -30,6 +30,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
+                       <?php echo '<h1>Welcome ' . $_SESSION['login_user'].'</h1>' //output the name of the admin user?> 
                         <h2 class="pull-left">Employees Details</h2>
                         <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
                         <a href="logout.php" class="btn btn-success pull-right">Log-out</a>
@@ -75,9 +76,8 @@
                                //new code//
                               $average = $average/$rowCount; //divides number of rows to get average
                                 echo "<tr>";
-                                echo "Average Salary: $average <br/>";
-                                echo "Number of current staff: $rowCount <br/>";
-                                echo 'Welcome ' . $_SESSION['login_user']; //output the name of the admin user
+                                echo "<td>Average Salary: $average </td>";
+                                echo "<td>Number of current staff: $rowCount </td>";
                                 echo "</tr>";
                           //end of new code//
                                 echo "</tbody>";                            
