@@ -25,15 +25,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $password = $input_password;
     }
-    
 
+ 
     
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err)){
 
         // Prepare an insert statement
         $sql = "INSERT INTO admin (username, password) VALUES (:username, :password)";
- 
+
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(':username', $param_username);
@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <p>Please fill this form and submit to add an administrator to the database.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="on">
                         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                            <label>Userame</label>
+                            <label>Username</label>
                             <input type="text" name="username"  class="form-control" value="<?php echo $username; ?>">
                             <span class="help-block"><?php echo $username_err;?></span>
                         </div>
@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="help-block"><?php echo $password_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-default">Cancel</a>
+                        <a href="login.php" class="btn btn-default">Cancel</a>
                     </form>
                 </div>
             </div>        

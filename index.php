@@ -30,7 +30,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                       <?php echo '<h1>Welcome ' . $_SESSION['login_user'].'</h1>' //output the name of the admin user?> 
+                       <?php include('session.php'); 
+                        echo '<h1>Welcome ' . $_SESSION['login_user'].'</h1>' //output the name of the admin user?> 
                         <h2 class="pull-left">Employees Details</h2>
                         <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
                         <a href="logout.php" class="btn btn-success pull-right">Log-out</a>
@@ -38,7 +39,7 @@
                     <?php
                     // Include config file
                     require_once 'config.php';
-                    include('session.php');
+                    
                     // Attempt select query execution
                     $sql = "SELECT * FROM employees";
                     if($result = $pdo->query($sql)){
