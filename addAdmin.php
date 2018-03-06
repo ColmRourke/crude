@@ -69,39 +69,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Create Admin</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        .wrapper{
-            width: 500px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="loginStyle.css"> <!-- CSS file reference-->
+
 </head>
 <body>
-    <div class="wrapper">
+    <div class="login-page">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-header">
+                    <div class="form">
                         <h2>Create Admin</h2>
-                    </div>
                     <p>Please fill this form and submit to add an administrator to the database.</p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="on">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="on" class="login-form">
                         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                            <label>Username</label>
-                            <input type="text" name="username"  class="form-control" value="<?php echo $username; ?>">
+                            <input type="text" name="username" placeholder="username" value="<?php echo $username; ?>">
                             <span class="help-block"><?php echo $username_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+                            <input type="password" name="password" placeholder="password" value="<?php echo $password; ?>">
                             <span class="help-block"><?php echo $password_err;?></span>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="login.php" class="btn btn-default">Cancel</a>
+                        <input type="submit" value="Submit" id="submit">
+                        <a href="login.php">Cancel</a>
                     </form>
-                </div>
-            </div>        
+          </div>
         </div>
     </div>
 </body>

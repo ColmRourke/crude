@@ -105,11 +105,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Create Record</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        .wrapper{
-            width: 500px;
+    <style>
+        .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);       
+}
+      body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+       
+}
+      .wrapper{
+            width: 750px;
             margin: 0 auto;
         }
+      #submit {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 43%; 
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -120,10 +155,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="page-header">
                         <h2>Create Record</h2>
                     </div>
-                    <p>Please fill this form and submit to add employee record to the database.</p>
+                   
                  
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="on">
-                       <div id="Questions">
+                     <div id="Questions">
+                         <div class="form">
+                           <p>Please fill this form and submit to add employee record to the database.</p>
                         <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                             <label>Name</label>
                             <input type="text" name="name[]"  class="form-control" value="<?php echo $name; ?>">
@@ -144,13 +181,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="text" name="email[]" class="form-control" value="<?php echo $email; ?>"> <!--note changes here of the name, it is now an array -->
                             <span class="help-block"><?php echo $email_err;?></span>
                         </div>
+                         </div>
                       </div>
                      </div>                
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-default">Cancel</a>
-                    </form>
-                     
-              <button id="button" class="btn btn-default" onclick="duplicate()">Add another employee</button> <!--User can add multiple employees -->
+                        <input type="submit" value="Submit" id="submit">
+                        <a href="index.php"id="submit">Cancel</a>
+                    </form>     
+              <button id="submit" class="btn btn-default" onclick="duplicate()">Add another employee</button> <!--User can add multiple employees -->
                 </div>
             </div>        
         </div>

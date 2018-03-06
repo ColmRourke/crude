@@ -30,26 +30,19 @@
    
    <head>
       <title>Login Page</title>
-		 
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        .wrapper{
-            width: 500px;
-            margin: 0 auto;
-        }
-    </style>      
+		  <link rel="stylesheet" href="loginStyle.css">    
    </head>
-   <div class="wrapper">
+   <div class="login-page">
 		 <div class="container-fluid">
    <body>
-  	<div class="page-header">
+  	<div class="form">
                         <h2>Login</h2>
-                    </div>
-               
-               <form action = "" method = "post">
-                  <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
-                  <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                  <input type="submit" class="btn btn-primary" value="Login" />
+                   
+                
+               <form action = "" method = "post" class="login-form">
+                  <input type = "text" placeholder="username" name = "username" class = "box"/><br /><br />
+                  <input type = "password" name = "password" placeholder="password" class = "box" /><br/><br />
+                  <input type="submit" class="btn btn-primary" value="Login" id="submit"/>
 								  <a href="indexWithoutlogin.php" class="btn btn-default">Cancel</a>
 								  <a href="addAdmin.php" class="btn btn-default">Add administrator</a>
                </form>
@@ -61,7 +54,7 @@
          </div>
 			
       </div>
-
+</div>
    </body>
 </div>
 </div>
