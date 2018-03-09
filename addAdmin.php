@@ -78,6 +78,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="form">
                         <h2>Create Admin</h2>
                     <p>Please fill this form and submit to add an administrator to the database.</p>
+                      
+                      <!-- The form requires a username and a password -->
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="on" class="login-form">
                         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                             <input type="text" name="username" placeholder="username" value="<?php echo $username; ?>">

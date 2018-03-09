@@ -106,6 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Create Record</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style>
+     /* CSS from https://codepen.io/colorlib/pen/rxddKy */
         .form {
   position: relative;
   z-index: 1;
@@ -117,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);       
 }
       body {
-  background: #76b852; /* fallback for old browsers */
+  background: #76b852; /* fallback for old browsers that wont allow for color mixing provided by the code below */
   background: -webkit-linear-gradient(right, #76b852, #8DC26F);
   background: -moz-linear-gradient(right, #76b852, #8DC26F);
   background: -o-linear-gradient(right, #76b852, #8DC26F);
@@ -198,7 +199,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 function duplicate() {  
     var clone = original.cloneNode(true); // "deep" clone
-    clone.id = "Questions" + ++i;
+    clone.id = "Questions" + ++i; //gives questions an id that increments
     original.parentNode.appendChild(clone);  //append the clone to original
 }
   </script>
