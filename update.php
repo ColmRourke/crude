@@ -4,7 +4,7 @@ require_once 'config.php';
  
 // Define variables and initialize with empty values
 $name = $address = $salary = $email = "";  //note $email is also declared, this is the email that will be provided by user
-$name_err = $address_err = $salary_err = $name_err = "";
+$name_err = $address_err = $salary_err = $email_err = "";
  
 // Processing form data when form is submitted
 if(isset($_POST["id"]) && !empty($_POST["id"])){

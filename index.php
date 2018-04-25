@@ -56,7 +56,7 @@
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
-                                $average; //new variable to calculate average
+                                $average=0; //new variable to calculate average
                                 $rowCount = 0; //counts iteration of while loop 
                                 while($row = $result->fetch()){
                                   $rowCount=$rowCount+1;  

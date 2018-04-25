@@ -3,7 +3,7 @@
 require_once 'config.php';
 // Define variables and initialize with empty values
 $name = $address = $salary = $email = "";
-//$name_err = $address_err = $salary_err = $email_err = "";
+$name_err = $address_err = $salary_err = $email_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){

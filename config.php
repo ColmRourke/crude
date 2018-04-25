@@ -4,8 +4,8 @@
 server with default setting (user 'root' with no password) */
 $dbname = 'crude'; //database name can be easily changed
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'crude');
-define('DB_PASSWORD', '0000');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
 define('DB_NAME', $dbname);
 /* Attempt to connect to MySQL database */
 try{
